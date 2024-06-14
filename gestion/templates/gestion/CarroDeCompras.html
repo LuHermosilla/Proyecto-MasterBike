@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen del Carro de Compras</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-8">
+                <h4>Carro de Compras</h4>
+                <!-- Lista de productos en el carro -->
+                <div id="cartItems">
+                    <!-- Cada producto se muestra aquí -->
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h4>Resumen</h4>
+                <ul class="list-group">
+                    <li class="list-group-item">Valor neto: <span id="netValue">$0</span></li>
+                    <li class="list-group-item">Impuestos: <span id="taxes">$0</span></li>
+                    <li class="list-group-item">Costo de despacho: <span id="shippingCost">$0</span></li>
+                    <li class="list-group-item">Total a pagar: <span id="totalValue">$0</span></li>
+                </ul>
+                <button class="btn btn-primary mt-3" onclick="checkout()">Realizar Pago</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

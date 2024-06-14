@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Arriendo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Solicitud de Arriendo</h2>
+        <form id="solicitudArriendoForm">
+            <div class="form-group">
+                <label for="clienteId">ID Cliente</label>
+                <input type="text" class="form-control" id="clienteId" name="clienteId" required>
+            </div>
+            <div class="form-group">
+                <label for="tipoBicicleta">Tipo de Bicicleta</label>
+                <input type="text" class="form-control" id="tipoBicicleta" name="tipoBicicleta" required>
+            </div>
+            <div class="form-group">
+                <label for="periodoArriendo">Periodo de Arriendo</label>
+                <input type="text" class="form-control" id="periodoArriendo" name="periodoArriendo" required>
+            </div>
+            <div class="form-group">
+                <label for="formaPago">Forma de Pago</label>
+                <input type="text" class="form-control" id="formaPago" name="formaPago" required>
+            </div>
+            <div class="form-group">
+                <label for="depositoGarantia">Depósito de Garantía</label>
+                <input type="number" class="form-control" id="depositoGarantia" name="depositoGarantia" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Solicitar Arriendo</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

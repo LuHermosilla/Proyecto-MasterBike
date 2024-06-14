@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Empleados</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h2>Gestión de Empleados</h2>
+
+        <!-- Formulario de Registro de Empleados -->
+        <form id="registroEmpleadoForm">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="rut">RUT</label>
+                <input type="text" class="form-control" id="rut" name="rut" required>
+            </div>
+            <div class="form-group">
+                <label for="cargo">Cargo</label>
+                <select class="form-control" id="cargo" name="cargo" required>
+                    <option value="">Seleccione un cargo</option>
+                    <option value="Vendedor">Vendedor</option>
+                    <option value="Supervisor">Supervisor</option>
+                    <option value="Técnico">Técnico</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sucursal">Sucursal</label>
+                <select class="form-control" id="sucursal" name="sucursal" required>
+                    <!-- Aquí se deben cargar las sucursales desde la base de datos -->
+                    <option value="1">Casa Matriz</option>
+                    <option value="2">Sucursal 1</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar Empleado</button>
+        </form>
+
+        <!-- Listado de Empleados -->
+        <div class="mt-5">
+            <h3>Listado de Empleados</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>RUT</th>
+                        <th>Cargo</th>
+                        <th>Sucursal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se deben cargar los empleados desde la base de datos -->
+                    <tr>
+                        <td>1</td>
+                        <td>Juan Pérez</td>
+                        <td>12345678-9</td>
+                        <td>Vendedor</td>
+                        <td>Sucursal 1</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>María López</td>
+                        <td>98765432-1</td>
+                        <td>Supervisor</td>
+                        <td>Sucursal 2</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm">Editar</button>
+                            <button class="btn btn-danger btn-sm">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+<!--Explicación de la Plantilla
+Formulario de Registro de Empleados:
+
+Contiene campos para ingresar el nombre, RUT, cargo y sucursal del empleado.
+El campo "Cargo" utiliza un select con opciones predefinidas.
+El campo "Sucursal" también utiliza un select, que debe ser poblado dinámicamente desde la base de datos.
+Listado de Empleados:
+
+Una tabla para mostrar la lista de empleados con columnas para ID, nombre, RUT, cargo, sucursal y acciones.
+Los botones "Editar" y "Eliminar" permitirán gestionar cada empleado. Estos deben conectarse a la lógica correspondiente para manejar estas acciones.
+Conexión a Bootstrap:
+
+La plantilla incluye enlaces a Bootstrap para estilizar los componentes.
+Incluye jQuery y Popper.js necesarios para las funcionalidades de Bootstrap.
+Esta plantilla proporciona una base sólida para la gestión de empleados en la plataforma MasterBikes. Puedes adaptarla según las necesidades específicas 
+de tu aplicación, especialmente la parte de la carga dinámica de datos desde la base de datos. -->

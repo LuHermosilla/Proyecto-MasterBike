@@ -72,13 +72,17 @@
                 </li>
                 <!-- Repetir similar para los otros cuatro menús desplegables -->
             </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Buscar">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
             <a class="nav-link" href="#">
                 <i class="fas fa-shopping-cart"></i> Carro <span class="badge badge-pill badge-danger">0</span>
             </a>
             <a class="nav-link" href="https://wa.me/56993257713?text=Hola, quisiera comunicarme con ustedes." target="_blank"> 
-                <img src="images/icons/logos--whatsapp-icon.svg" style="width: 40px; height: 40px;"> 
+                <img src="images/icons/logos--whatsapp-icon.svg" style="width: 40px; height: 40px;">
             </a>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
         </div>
     </nav>
     <div class="container mt-5">
@@ -103,10 +107,54 @@
             </div>
             <button type="submit" class="btn btn-primary">Solicitar Reparación</button>
         </form>
+    </div> 
+    <div class="container mt-5">
+        <h2>Historial de Reparaciones</h2>
+        <table class="table table-bordered" id="historialReparaciones">
+            <thead>
+                <tr>
+                    <th>ID Cliente</th>
+                    <th>Fecha de Solicitud</th>
+                    <th>Fecha de Reparación</th>
+                    <th>Descripción del Problema</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas de historial se agregarán aquí -->
+            </tbody>
+        </table>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('solicitudReparacionForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Obtener los valores del formulario
+            const clienteId = document.getElementById('clienteId').value;
+            const fechaSolicitud = document.getElementById('fechaSolicitud').value;
+            const fechaReparacion = document.getElementById('fechaReparacion').value;
+            const descripcionProblema = document.getElementById('descripcionProblema').value;
+
+            // Crear una nueva fila para el historial
+            const nuevaFila = `
+                <tr>
+                    <td>${clienteId}</td>
+                    <td>${fechaSolicitud}</td>
+                    <td>${fechaReparacion}</td>
+                    <td>${descripcionProblema}</td>
+                </tr>
+            `;
+
+            // Agregar la nueva fila a la tabla
+            document.querySelector('#historialReparaciones tbody').insertAdjacentHTML('beforeend', nuevaFila);
+
+            // Limpiar el formulario
+            this.reset();
+        });
+    </script>
 </body>
 
 </html>

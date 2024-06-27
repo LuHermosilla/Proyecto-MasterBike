@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -51,7 +52,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                         <a class="dropdown-item" href="#">Mis Datos</a>
                         <a class="dropdown-item" href="#">Compras</a>
-                        <a class="dropdown-item" href="#">Productos</a>
+                        <a class="dropdown-item" href="Productos.html">Productos</a>
                         <a class="dropdown-item" href="#">Agendar Visita</a>
                         <a class="dropdown-item" href="#">Arriendo de Bicicletas</a>
                         <a class="dropdown-item" href="#">Seguimiento Servicios</a>
@@ -73,57 +74,127 @@
                 </li>
                 <!-- Repetir similar para los otros cuatro menús desplegables -->
             </ul>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Buscar">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
             <a class="nav-link" href="#">
                 <i class="fas fa-shopping-cart"></i> Carro <span class="badge badge-pill badge-danger">0</span>
             </a>
             <a class="nav-link" href="https://wa.me/56993257713?text=Hola, quisiera comunicarme con ustedes." target="_blank"> 
                 <img src="images/icons/logos--whatsapp-icon.svg" style="width: 40px; height: 40px;">
             </a>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
         </div>
     </nav>
-    <div>
-        <center>
-            <iframe width=270px height=250px class="embed-responsive-item" src="https://www.youtube.com/embed/qgInM6FH8Lk?rel=0" allowfullscreen> </iframe>
-        </center>
-    </div>
-    <div class="container mt-4">
-        <div id="carouselExample" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExample" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExample" data-slide-to="1"></li>
-                <li data-target="#carouselExample" data-slide-to="2"></li>
-                <li data-target="#carouselExample" data-slide-to="3"></li>
-                <li data-target="#carouselExample" data-slide-to="4"></li>
-            </ol>
+
+    <div class="container">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/bici_1.jpg" class="d-block w-100" width=100px height=300px>
+                    <img src="images/productos/adulto/AD2.png" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/bici_2.jpg" class="d-block w-100" width=100px height=300px>
+                    <img src="images/productos/adulto/AD3.png" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/bici_3.jpg" class="d-block w-100" width=100px height=300px>
+                    <img src="images/productos/adulto/AD4.png" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/bici_4.jpg" class="d-block w-100" width=100px height=300px>
+                    <img src="images/productos/ciclismo/CI1.png" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/bici_5.jpg" class="d-block w-100" width=100px height=300px>
+                    <img src="images/productos/ciclismo/CI3.png" class="d-block w-100" width=400px height=350px>
+                </div>
+                <div class="carousel-item">
+                    <img src="images/productos/ciclismo/CI4.png" class="d-block w-100" width=400px height=350px>
+                </div>
+
+                <!-- Añadir aquí las cuatro imágenes restantes del carrusel -->
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card">
+                    <img src="images/productos/adulto/AD2.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Mountain Bike Naranja</h5>
+                        <p class="card-text">MOUNTAIN BIKE MONTAGNE 27.5" NARANJO</p>
+                        <p class="card-text">Precio: $209.990</p>
+                        <button class="btn btn-primary">Agregar al Carro</button>
+                    </div>
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Siguiente</span>
-            </a>
+            <div class="col">
+                <div class="card">
+                    <img src="images/productos/adulto/AD3.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Mountain Bike Gris</h5>
+                        <p class="card-text">BICICLETA MOUNTAIN BIKE ECRINS 27,5" M GRIS</p>
+                        <p class="card-text">Precio: $179.000</p>
+                        <button class="btn btn-primary">Agregar al Carro</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="images/productos/adulto/AD4.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Mountain Bike Rosa</h5>
+                        <p class="card-text">BICICLETA MOUNTAIN BIKE DAYA 27.5" ROSA</p>
+                        <p class="card-text">Precio: $219.000</p>
+                        <button class="btn btn-primary">Agregar al Carro</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="images/productos/ciclismo/CI1.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Bicicleta Ruta Trek Blanca</h5>
+                        <p class="card-text">RUTA TREK MADONE SL 6 GEN 6 BLANCA</p>
+                        <p class="card-text">Precio: $3.843.000</p>
+                        <button class="btn btn-primary">Agregar al Carro</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <img src="images/productos/ciclismo/CI3.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Bicicleta Ruta Carbono</h5>
+                        <p class="card-text">BICICLETA RUTA LOOK / CARBON FLUO</p>
+                        <p class="card-text">Precio: $1.592.000</p>
+                        <button class="btn btn-primary">Agregar al Carro</button>
+                    </div>
+                </div>
+            </div><div class="col">
+                <div class="card">
+                    <img src="images/productos/ciclismo/CI4.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">Bicicleta Ruta Inizio</h5>
+                        <p class="card-text">Bicicleta Ruta Team Inizio XS / 48cms</p>
+                        <p class="card-text">Precio: $559.000</p>
+                        <button class="btn btn-primary">Agregar al Carro</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Añadir aquí los otros nueve productos en cards -->
         </div>
     </div>
-    
+
+    <!-- Bootstrap JS y dependencias Popper.js y jQuery (opcional) -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>    
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

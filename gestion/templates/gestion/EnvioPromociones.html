@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envío de Promociones a Clientes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table th {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"><img src="images/fm_logo.jpg" alt="Logo" width="30" height="30"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Bodega</b>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="#">Ingreso Productos</a>
+                        <a class="dropdown-item" href="#">Inventario Bodega</a>
+                        <a class="dropdown-item" href="#">Proveedores</a>
+                        <a class="dropdown-item" href="#">Despacho</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Ventas</b>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="#">Caja</a>
+                        <a class="dropdown-item" href="#">Ventas Web</a>
+                        <a class="dropdown-item" href="#">Ventas Sucursal</a>
+                        <a class="dropdown-item" href="#">Mantencion/Reparacion</a>
+                        <a class="dropdown-item" href="#">Control de Ventas</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Cliente</b>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="#">Mis Datos</a>
+                        <a class="dropdown-item" href="#">Compras</a>
+                        <a class="dropdown-item" href="Productos.html">Productos</a>
+                        <a class="dropdown-item" href="#">Agendar Visita</a>
+                        <a class="dropdown-item" href="#">Arriendo de Bicicletas</a>
+                        <a class="dropdown-item" href="#">Seguimiento Servicios</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <b>Supervisor</b>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                        <a class="dropdown-item" href="#">Gestion Empleados</a>
+                        <a class="dropdown-item" href="#">Perfiles</a>
+                        <a class="dropdown-item" href="#">Compras</a>
+                        <a class="dropdown-item" href="#">Devoluciones</a>
+                        <a class="dropdown-item" href="#">Cambios</a>
+                        <a class="dropdown-item" href="#">Envio Correos Promociones</a>
+                    </div>
+                </li>
+                <!-- Repetir similar para los otros cuatro menús desplegables -->
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Buscar">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+            </form>
+            <a class="nav-link" href="#">
+                <i class="fas fa-shopping-cart"></i> Carro <span class="badge badge-pill badge-danger">0</span>
+            </a>
+            <a class="nav-link" href="https://wa.me/56993257713?text=Hola, quisiera comunicarme con ustedes." target="_blank"> 
+                <img src="images/icons/logos--whatsapp-icon.svg" style="width: 40px; height: 40px;">
+            </a>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2>Envío de Promociones a Clientes</h2>
+        <form id="promocionForm">
+            <div class="form-group">
+                <label for="fechaInicio">Fecha de Inicio</label>
+                <input type="date" class="form-control" id="fechaInicio" name="fechaInicio" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaTermino">Fecha de Término</label>
+                <input type="date" class="form-control" id="fechaTermino" name="fechaTermino" required>
+            </div>
+            <div class="form-group">
+                <label for="textoPromocional">Texto Promocional</label>
+                <textarea class="form-control" id="textoPromocional" name="textoPromocional" rows="3" required></textarea>
+            </div>
+            <h4>Seleccionar Clientes</h4>
+            <table class="table table-bordered mt-3" id="tablaClientes">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" name="clientes[]" value="cliente1@example.com"></td>
+                        <td>Cliente 1</td>
+                        <td>cliente1@example.com</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="clientes[]" value="cliente2@example.com"></td>
+                        <td>Cliente 2</td>
+                        <td>cliente2@example.com</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox" name="clientes[]" value="cliente3@example.com"></td>
+                        <td>Cliente 3</td>
+                        <td>cliente3@example.com</td>
+                    </tr>
+                    <!-- Agregar más filas según sea necesario -->
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary">Enviar Promoción</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Select all functionality
+            document.getElementById('selectAll').addEventListener('click', function() {
+                const checkboxes = document.querySelectorAll('input[name="clientes[]"]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+            });
+
+            // Form submission
+            document.getElementById('promocionForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                const form = event.target;
+                const formData = new FormData(form);
+                const selectedClients = formData.getAll('clientes[]');
+                if (selectedClients.length === 0) {
+                    alert('Por favor, seleccione al menos un cliente.');
+                    return;
+                }
+                const fechaInicio = formData.get('fechaInicio');
+                const fechaTermino = formData.get('fechaTermino');
+                const textoPromocional = formData.get('textoPromocional');
+                // Enviar datos (esto es un ejemplo, en una implementación real se debe enviar al servidor)
+                console.log({
+                    fechaInicio,
+                    fechaTermino,
+                    textoPromocional,
+                    selectedClients
+                });
+                alert('Promoción enviada con éxito.');
+            });
+        });
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Gestión de Inventario</h2>
+        <div class="form-group">
+            <label for="tipoProducto">Filtrar por Tipo de Producto</label>
+            <select class="form-control" id="tipoProducto">
+                <option value="">Todos</option>
+                <option value="Bicicletas">Bicicletas</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Partes">Partes</option>
+                <option value="Arriendos">Arriendos</option>
+            </select>
+        </div>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Nombre del Producto</th>
+                    <th>Tipo de Producto</th>
+                    <th>Cantidad en Bodega</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-tipo="Bicicletas">
+                    <td>Bicicleta de Montaña</td>
+                    <td>Bicicletas</td>
+                    <td>10</td>
+                </tr>
+                <tr data-tipo="Bicicletas">
+                    <td>Bicicleta de Ruta</td>
+                    <td>Bicicletas</td>
+                    <td>5</td>
+                </tr>
+                <tr data-tipo="Accesorios">
+                    <td>Casco</td>
+                    <td>Accesorios</td>
+                    <td>20</td>
+                </tr>
+                <tr data-tipo="Accesorios">
+                    <td>Guantes</td>
+                    <td>Accesorios</td>
+                    <td>15</td>
+                </tr>
+                <tr data-tipo="Partes">
+                    <td>Cadena</td>
+                    <td>Partes</td>
+                    <td>25</td>
+                </tr>
+                <tr data-tipo="Partes">
+                    <td>Pedales</td>
+                    <td>Partes</td>
+                    <td>30</td>
+                </tr>
+                <tr data-tipo="Arriendos">
+                    <td>Arriendo Bicicleta de Montaña</td>
+                    <td>Arriendos</td>
+                    <td>3</td>
+                </tr>
+                <tr data-tipo="Arriendos">
+                    <td>Arriendo Bicicleta de Ruta</td>
+                    <td>Arriendos</td>
+                    <td>2</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

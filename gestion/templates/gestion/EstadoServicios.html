@@ -1,0 +1,88 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Estado de Servicios</h2>
+        <div class="form-group">
+            <label for="tipoProducto">Filtrar por Tipo de Producto</label>
+            <select class="form-control" id="tipoProducto">
+                <option value="">Todos</option>
+                <option value="Bicicletas">Bicicletas</option>
+                <option value="Accesorios">Accesorios</option>
+                <option value="Partes">Partes</option>
+                <option value="Arriendos">Arriendos</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="estadoServicio">Filtrar por Estado del Servicio</label>
+            <select class="form-control" id="estadoServicio">
+                <option value="">Todos</option>
+                <option value="Entregado">Entregado</option>
+                <option value="En Despacho">En Despacho</option>
+                <option value="En Armado">En Armado</option>
+                <option value="Pendiente">Pendiente</option>
+            </select>
+        </div>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre del Producto</th>
+                    <th>Tipo de Producto</th>
+                    <th>Estado del Servicio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-tipo="Bicicletas" data-estado="Entregado">
+                    <td>2024-06-01</td>
+                    <td>Bicicleta de Montaña</td>
+                    <td>Bicicletas</td>
+                    <td>Entregado</td>
+                </tr>
+                <tr data-tipo="Bicicletas" data-estado="En Despacho">
+                    <td>2024-06-10</td>
+                    <td>Bicicleta de Ruta</td>
+                    <td>Bicicletas</td>
+                    <td>En Despacho</td>
+                </tr>
+                <tr data-tipo="Accesorios" data-estado="En Armado">
+                    <td>2024-05-15</td>
+                    <td>Casco</td>
+                    <td>Accesorios</td>
+                    <td>En Armado</td>
+                </tr>
+                <tr data-tipo="Accesorios" data-estado="Pendiente">
+                    <td>2024-05-20</td>
+                    <td>Guantes</td>
+                    <td>Accesorios</td>
+                    <td>Pendiente</td>
+                </tr>
+                <tr data-tipo="Partes" data-estado="Entregado">
+                    <td>2024-06-05</td>
+                    <td>Cadena</td>
+                    <td>Partes</td>
+                    <td>Entregado</td>
+                </tr>
+                <tr data-tipo="Partes" data-estado="En Despacho">
+                    <td>2024-06-08</td>
+                    <td>Pedales</td>
+                    <td>Partes</td>
+                    <td>En Despacho</td>
+                </tr>
+                <tr data-tipo="Arriendos" data-estado="En Armado">
+                    <td>2024-05-25</td>
+                    <td>Arriendo Bicicleta de Montaña</td>
+                    <td>Arriendos</td>
+                    <td>En Armado</td>
+                </tr>
+                <tr data-tipo="Arriendos" data-estado="Pendiente">
+                    <td>2024-06-02</td>
+                    <td>Arriendo Bicicleta de Ruta</td>
+                    <td>Arriendos</td>
+                    <td>Pendiente</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

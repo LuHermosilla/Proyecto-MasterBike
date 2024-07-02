@@ -1,0 +1,27 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Módulo de Compra a Proveedores</h2>
+        <form onsubmit="return validarCompra()">
+            <div class="form-group">
+                <label for="idCompra">ID Compra</label>
+                <input type="text" class="form-control" id="idCompra" required>
+            </div>
+            <div class="form-group">
+                <label for="idProveedor">ID Proveedor</label>
+                <input type="text" class="form-control" id="idProveedor" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaCompra">Fecha de Compra</label>
+                <input type="date" class="form-control" id="fechaCompra" required>
+            </div>
+            <div class="form-group">
+                <label for="totalCompra">Total Compra</label>
+                <input type="number" class="form-control" id="totalCompra" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+{% endblock %}

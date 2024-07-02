@@ -1,0 +1,35 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Gestión de Devoluciones y Cambios</h2>
+        <form onsubmit="return validarDevolucion()">
+            <div class="form-group">
+                <label for="idDevolucion">ID Devolución</label>
+                <input type="text" class="form-control" id="idDevolucion" required>
+            </div>
+            <div class="form-group">
+                <label for="idVenta">ID Venta</label>
+                <input type="text" class="form-control" id="idVenta" required>
+            </div>
+            <div class="form-group">
+                <label for="idProducto">ID Producto</label>
+                <input type="text" class="form-control" id="idProducto" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad</label>
+                <input type="number" class="form-control" id="cantidad" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaDevolucion">Fecha de Devolución</label>
+                <input type="date" class="form-control" id="fechaDevolucion" required>
+            </div>
+            <div class="form-group">
+                <label for="motivo">Motivo</label>
+                <textarea class="form-control" id="motivo" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+        </form>
+    </div>
+{% endblock %}

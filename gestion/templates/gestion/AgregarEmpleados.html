@@ -1,0 +1,74 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Agregar Empleados</h2>
+
+        <!-- Formulario de Registro de Empleados -->
+        <form id="registroEmpleadoForm" action="empleados_add" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="apellidoPat">Apellido Paterno</label>
+                <input type="text" class="form-control" id="apellidoPat" name="apellidoPat" required>
+            </div>
+            <div class="form-group">
+                <label for="apellidoMat">Apellido Materno</label>
+                <input type="text" class="form-control" id="apellidoMat" name="apellidoMat" required>
+            </div>
+            <div class="form-group">
+                <label for="rut">RUT</label>
+                <input type="text" class="form-control" id="rut" name="rut" required>
+            </div>
+            <div class="form-group">
+                <label for="dv">DV</label>
+                <input type="text" class="form-control" id="dv" name="dv" required>
+            </div>
+            <div class="form-group">
+                <label for="cargo">Cargo</label>
+                <select class="form-control" id="cargo" name="cargo" required>
+                    {% for cargo in cargos %}
+                            <option value="{{cargo.id_cargo}}">{{cargo.cargo_emp}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="sucursal">Sucursal</label>
+                <select class="form-control" id="sucursal" name="sucursal" required>
+                    {% for sucursal in sucursales %}
+                            <option value="{{sucursal.id_sucursal}}">{{sucursal.nombre_sucursal}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrar Empleado</button>
+            <button type="reset" class="btn btn-primary">Limpiar</button>
+        </form>
+        <a href="{% url 'empleados_list' %}"> Volver </a>
+        <div id="idMensajes">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+
+<!--Explicación de la Plantilla
+Formulario de Registro de Empleados:
+
+Contiene campos para ingresar el nombre, RUT, cargo y sucursal del empleado.
+El campo "Cargo" utiliza un select con opciones predefinidas.
+El campo "Sucursal" también utiliza un select, que debe ser poblado dinámicamente desde la base de datos.
+Listado de Empleados:
+
+Una tabla para mostrar la lista de empleados con columnas para ID, nombre, RUT, cargo, sucursal y acciones.
+Los botones "Editar" y "Eliminar" permitirán gestionar cada empleado. Estos deben conectarse a la lógica correspondiente para manejar estas acciones.
+Conexión a Bootstrap:
+
+La plantilla incluye enlaces a Bootstrap para estilizar los componentes.
+Incluye jQuery y Popper.js necesarios para las funcionalidades de Bootstrap.
+Esta plantilla proporciona una base sólida para la gestión de empleados en la plataforma MasterBikes. Puedes adaptarla según las necesidades específicas 
+de tu aplicación, especialmente la parte de la carga dinámica de datos desde la base de datos. -->

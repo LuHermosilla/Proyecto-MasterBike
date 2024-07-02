@@ -1,0 +1,43 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center">Gestión de Productos</h2>
+
+        <!-- Tabla para listar productos -->
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio Unitario</th>
+                    <th>Impuesto</th>
+                    <th>Stock Actual</th>
+                    <th>Proveedor</th>
+                    <th>Teléfono Proveedor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="productTable">
+                {% for producto in productos %}
+                    <tr>
+                        <td>{{producto.nombre_prod}}</td>
+                        <td>{{producto.id_categoria.nombre_categoria}}</td>
+                        <td>{{producto.precio_unit}}</td>
+                        <td>{{producto.impuesto}}</td>
+                        <td>{{producto.stock_actual}}</td>
+                        <td>{{producto.id_proveedor.nombre_prov}}</td>
+                        <td>{{producto.id_proveedor.telefono}}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm"><a href="{% url 'productos_edit' pk=producto.id_producto %}">Editar</a></button>
+                            <button class="btn btn-danger btn-sm"><a href="{% url 'productos_del' pk=producto.id_producto %}">Eliminar</a></button>
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

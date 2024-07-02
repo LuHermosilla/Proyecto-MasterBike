@@ -22,22 +22,22 @@ class Proveedores(models.Model):
     telefono = models.CharField(max_length=15)
     email = models.EmailField(max_length=100,unique=True)
     
-class CategoriaProductos(models.Model):
+class CategoriaProducto(models.Model):
     id_categoria = models.IntegerField(primary_key=True)
     nombre_categoria = models.CharField(max_length=20)
     
-class Productos(models.Model):
-    id_producto = models.IntegerField(primary_key=True),
-    nombre_prod = models.CharField(max_length=20),
-    categoria = models.ForeignKey('CategoriaProductos',on_delete=models.CASCADE, db_column='id_categoria')
-    precio_unit = models.IntegerField(9,2),
-    impuesto = models.IntegerField(9,2),
-    stock_actual = models.IntegerField(9,2),
+class Producto(models.Model):
+    id_producto = models.IntegerField(primary_key=True)
+    nombre_prod = models.CharField(max_length=20)
+    id_categoria = models.ForeignKey('CategoriaProducto',on_delete=models.CASCADE, db_column='id_categoria')
+    precio_unit = models.IntegerField(9)
+    impuesto = models.IntegerField(9)
+    stock_actual = models.IntegerField(9)
     id_proveedor = models.ForeignKey('Proveedores',on_delete=models.CASCADE, db_column='id_proveedor')
     
 class Inventario(models.Model):
     id_inventario = models.IntegerField(primary_key=True)
-    id_producto = models.ForeignKey('Productos',on_delete=models.CASCADE, db_column='id_producto')
+    id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
     cantidad = models.IntegerField(9)
     fecha_entrada = models.DateField(blank=False,null=False)
 
@@ -47,13 +47,14 @@ class Sucursales(models.Model):
     direccion = models.CharField(max_length=50)
     telefono = models.CharField(max_length=15)
     
-class Empleados(models.Model):
+class Empleado(models.Model):
     id_empleado = models.IntegerField(primary_key=True)
     nombre_emp = models.CharField(max_length=20)
     aPaterno_emp = models.CharField(max_length=20)
     aMaterno_emp = models.CharField(max_length=20)
-    rut_emp = models.CharField(max_length=20, unique=True)
-    cargo_emp = models.ForeignKey('Cargos',on_delete=models.CASCADE, db_column='id_cargo')
+    rut_emp = models.IntegerField(8)
+    dv = models.IntegerField(1)
+    id_cargo = models.ForeignKey('Cargos',on_delete=models.CASCADE, db_column='id_cargo')
     id_sucursal = models.ForeignKey('Sucursales',on_delete=models.CASCADE, db_column='id_sucursal')
     
 class EstadosPedido(models.Model):
@@ -63,14 +64,14 @@ class EstadosPedido(models.Model):
 class Pedidos(models.Model):
     id_pedido= models.IntegerField(primary_key=True)
     id_cliente= models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
-    id_empleado= models.ForeignKey('Empleados',on_delete=models.CASCADE, db_column='id_empleado')
+    id_empleado= models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
     fecha_pedido= models.DateField(blank=False,null=False)
     estado_pedido= models.ForeignKey('EstadosPedido',on_delete=models.CASCADE, db_column='id_estado')
     
 class DetallePedido(models.Model):
     id_detalle = models.IntegerField(primary_key=True)
     id_pedido = models.ForeignKey('Pedidos',on_delete=models.CASCADE, db_column='id_pedido')
-    id_producto = models.ForeignKey('Productos',on_delete=models.CASCADE, db_column='id_producto')
+    id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
     cantidad = models.IntegerField(9)
     precio_unitario = models.IntegerField(9)
     
@@ -100,7 +101,7 @@ class Envios(models.Model):
     
 class InformesGestion(models.Model):
     id_informe = models.IntegerField(primary_key=True)
-    id_empleado = models.ForeignKey('Empleados',on_delete=models.CASCADE, db_column='id_empleado')
+    id_empleado = models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
     fecha_informe = models.DateField(blank=False,null=False)
     ventas_totales = models.IntegerField(9)
     stock_total = models.IntegerField(9)
@@ -112,7 +113,7 @@ class EstadosArriendo(models.Model):
 class Arriendos(models.Model):
     id_arriendo = models.IntegerField(primary_key=True)
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
-    id_producto = models.ForeignKey('Productos',on_delete=models.CASCADE, db_column='id_producto')
+    id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
     fecha_inicio = models.DateField(blank=False,null=False)
     fecha_fin = models.DateField(blank=False,null=False)
     forma_pago = models.CharField(max_length=20)
@@ -126,7 +127,7 @@ class EstadosReparacion(models.Model):
 class Reparaciones(models.Model):
     id_reparacion = models.IntegerField(primary_key=True),
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
-    id_empleado = models.ForeignKey('Empleados',on_delete=models.CASCADE, db_column='id_empleado')
+    id_empleado = models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
     fecha_solicitud = models.DateField(blank=False,null=False),
     fecha_reparacion = models.DateField(blank=False,null=False),
     descripcion_problema = models.CharField(max_length=200),
@@ -136,7 +137,7 @@ class Reparaciones(models.Model):
 class HistorialMantenciones(models.Model):
     id_historial = models.IntegerField(primary_key=True),
     id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
-    id_producto = models.ForeignKey('Productos',on_delete=models.CASCADE, db_column='id_producto')
+    id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
     fecha_mantencion = models.DateField(blank=False,null=False),
     descripcion_mantencion = models.CharField(max_length=200)
     

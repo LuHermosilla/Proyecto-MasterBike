@@ -1,0 +1,69 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center">Editar Productos</h2>
+        
+        <!-- Formulario para agregar/modificar productos -->
+        <form action="{% url 'productos_update' %}" id="productForm" class="mb-4" method="POST">
+            {% csrf_token %}
+            <input type="hidden" id="id_producto">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" value="{{producto.nombre_prod}}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="categoria">Categoría</label>
+                    <select class="form-control" name="categoria" required>
+                        {% for categoria in categorias %}
+                            {% if  categoria.nombre_categoria == producto.id_categoria.nombre_categoria %}
+                                <option value="{{categoria.id_categoria}}" selected>{{categoria.nombre_categoria}}</option>
+                            {% else %}
+                                <option value="{{categoria.id_categoria}}">{{categoria.nombre_categoria}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="precio_unitario">Precio Unitario</label>
+                    <input type="number" class="form-control" name="precio_unitario" value="{{producto.precio_unit}}" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="impuesto">Impuesto (%)</label>
+                    <input type="number" class="form-control" name="impuesto" value="{{producto.impuesto}}" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="stock_actual">Stock Actual</label>
+                    <input type="number" class="form-control" name="stock_actual" value="{{producto.stock_actual}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_proveedor">Proveedor</label>
+                    <select class="form-control" name="id_proveedor" required>
+                        {% for proveedor in proveedores %}
+                            {% if proveedor.nombre_prov == producto.id_proveedor.nombre_prov %}
+                                <option value="{{proveedor.id_proveedor}}" selected>{{proveedor.nombre_prov}}</option>
+                            {% else %}
+                                <option value="{{proveedor.id_proveedor}}">{{proveedor.nombre_prov}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="reset" class="btn btn-primary">Eliminar</button>
+        </form>
+        <a href="{% url 'productos_list' %}"> Volver </a>
+        <div id="idMensajes">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

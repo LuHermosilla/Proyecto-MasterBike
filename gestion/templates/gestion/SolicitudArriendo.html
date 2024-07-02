@@ -1,90 +1,7 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'gestion/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud de Arriendo</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="images/fm_logo.jpg" alt="Logo" width="30" height="30"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Bodega</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Ingreso Productos</a>
-                        <a class="dropdown-item" href="#">Inventario Bodega</a>
-                        <a class="dropdown-item" href="#">Proveedores</a>
-                        <a class="dropdown-item" href="#">Despacho</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Ventas</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Caja</a>
-                        <a class="dropdown-item" href="#">Ventas Web</a>
-                        <a class="dropdown-item" href="#">Ventas Sucursal</a>
-                        <a class="dropdown-item" href="#">Mantencion/Reparacion</a>
-                        <a class="dropdown-item" href="#">Control de Ventas</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Cliente</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Mis Datos</a>
-                        <a class="dropdown-item" href="#">Compras</a>
-                        <a class="dropdown-item" href="#">Productos</a>
-                        <a class="dropdown-item" href="#">Agendar Visita</a>
-                        <a class="dropdown-item" href="#">Arriendo de Bicicletas</a>
-                        <a class="dropdown-item" href="#">Seguimiento Servicios</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Supervisor</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Gestion Empleados</a>
-                        <a class="dropdown-item" href="#">Perfiles</a>
-                        <a class="dropdown-item" href="#">Compras</a>
-                        <a class="dropdown-item" href="#">Devoluciones</a>
-                        <a class="dropdown-item" href="#">Cambios</a>
-                        <a class="dropdown-item" href="#">Envio Correos Promociones</a>
-                    </div>
-                </li>
-                <!-- Repetir similar para los otros cuatro menús desplegables -->
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Buscar">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-            <a class="nav-link" href="#">
-                <i class="fas fa-shopping-cart"></i> Carro <span class="badge badge-pill badge-danger">0</span>
-            </a>
-            <a class="nav-link" href="https://wa.me/56993257713?text=Hola, quisiera comunicarme con ustedes." target="_blank"> 
-                <img src="images/icons/logos--whatsapp-icon.svg" style="width: 40px; height: 40px;">
-            </a>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
-        </div>
-    </nav>
+{% block content %}
     <div class="container mt-5">
         <h2>Solicitud de Arriendo</h2>
         <form id="solicitudArriendoForm">
@@ -111,9 +28,4 @@
             <button type="submit" class="btn btn-primary">Solicitar Arriendo</button>
         </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-
-</html>
+{% endblock %}

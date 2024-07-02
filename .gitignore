@@ -2,6 +2,6 @@
 /myvenv/
 
 #ignorar pycache
-/masterbyke/__pycache__/
+/masterbike/__pycache__/
 /gestion/__pycache__/
 /gestion/migrations/__pycache__/

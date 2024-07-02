@@ -1,0 +1,68 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>Gestión de Empleados</h2>
+
+        <button type="button" class="btn btn-primary">
+            <a href="{% url 'empleados_add' %}"> Agregar </a>
+        </button>
+        <!-- Listado de Empleados -->
+        <div class="mt-5">
+            <h3>Listado de Empleados</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>RUT</th>
+                        <th>Cargo</th>
+                        <th>Sucursal</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se deben cargar los empleados desde la base de datos -->
+                     {% for empleado in empleados %}
+                        <tr>
+                            <td>{{empleado.id_empleado}}</td>
+                            <td>{{empleado.nombre_emp}}</td>
+                            <td>{{empleado.aPaterno_emp}}</td>
+                            <td>{{empleado.aMaterno_emp}}</td>
+                            <td>{{empleado.rut_emp}}</td>
+                            <td>{{empleado.id_cargo.cargo_emp}}</td>
+                            <td>{{empleado.id_sucursal.nombre_sucursal}}</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm"><a href="{% url 'empleados_edit' pk=empleado.id_empleado %}">Editar</a></button>
+                                <button class="btn btn-danger btn-sm"><a href="{% url 'empleados_del' pk=empleado.id_empleado %}">Eliminar</a></button>
+                                
+                            </td>
+                        </tr>
+                     {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!--Explicación de la Plantilla
+Formulario de Registro de Empleados:
+
+Contiene campos para ingresar el nombre, RUT, cargo y sucursal del empleado.
+El campo "Cargo" utiliza un select con opciones predefinidas.
+El campo "Sucursal" también utiliza un select, que debe ser poblado dinámicamente desde la base de datos.
+Listado de Empleados:
+
+Una tabla para mostrar la lista de empleados con columnas para ID, nombre, RUT, cargo, sucursal y acciones.
+Los botones "Editar" y "Eliminar" permitirán gestionar cada empleado. Estos deben conectarse a la lógica correspondiente para manejar estas acciones.
+Conexión a Bootstrap:
+
+La plantilla incluye enlaces a Bootstrap para estilizar los componentes.
+Incluye jQuery y Popper.js necesarios para las funcionalidades de Bootstrap.
+Esta plantilla proporciona una base sólida para la gestión de empleados en la plataforma MasterBikes. Puedes adaptarla según las necesidades específicas 
+de tu aplicación, especialmente la parte de la carga dinámica de datos desde la base de datos. -->

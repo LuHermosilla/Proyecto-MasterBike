@@ -1,113 +1,27 @@
-<!DOCTYPE html>
-<html lang="es">
+{% extends 'gestion/base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Principal</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"><img src="images/fm_logo.jpg" alt="Logo" width="30" height="30"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Bodega</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Ingreso Productos</a>
-                        <a class="dropdown-item" href="#">Inventario Bodega</a>
-                        <a class="dropdown-item" href="#">Proveedores</a>
-                        <a class="dropdown-item" href="#">Despacho</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Ventas</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Caja</a>
-                        <a class="dropdown-item" href="#">Ventas Web</a>
-                        <a class="dropdown-item" href="#">Ventas Sucursal</a>
-                        <a class="dropdown-item" href="#">Mantencion/Reparacion</a>
-                        <a class="dropdown-item" href="#">Control de Ventas</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Cliente</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Mis Datos</a>
-                        <a class="dropdown-item" href="#">Compras</a>
-                        <a class="dropdown-item" href="Productos.html">Productos</a>
-                        <a class="dropdown-item" href="#">Agendar Visita</a>
-                        <a class="dropdown-item" href="#">Arriendo de Bicicletas</a>
-                        <a class="dropdown-item" href="#">Seguimiento Servicios</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <b>Supervisor</b>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="#">Gestion Empleados</a>
-                        <a class="dropdown-item" href="#">Perfiles</a>
-                        <a class="dropdown-item" href="#">Compras</a>
-                        <a class="dropdown-item" href="#">Devoluciones</a>
-                        <a class="dropdown-item" href="#">Cambios</a>
-                        <a class="dropdown-item" href="#">Envio Correos Promociones</a>
-                    </div>
-                </li>
-                <!-- Repetir similar para los otros cuatro menús desplegables -->
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Buscar">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-            </form>
-            <a class="nav-link" href="#">
-                <i class="fas fa-shopping-cart"></i> Carro <span class="badge badge-pill badge-danger">0</span>
-            </a>
-            <a class="nav-link" href="https://wa.me/56993257713?text=Hola, quisiera comunicarme con ustedes." target="_blank"> 
-                <img src="images/icons/logos--whatsapp-icon.svg" style="width: 40px; height: 40px;">
-            </a>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Login</button>
-        </div>
-    </nav>
-
+{% block content %}
     <div class="container">
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/productos/adulto/AD2.png" class="d-block w-100" width=400px height=350px>
+                    <img src="{% static 'images/productos/adulto/AD2.png' %}" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/productos/adulto/AD3.png" class="d-block w-100" width=400px height=350px>
+                    <img src="{% static 'images/productos/adulto/AD3.png' %}" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/productos/adulto/AD4.png" class="d-block w-100" width=400px height=350px>
+                    <img src="{% static 'images/productos/adulto/AD4.png' %}" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/productos/ciclismo/CI1.png" class="d-block w-100" width=400px height=350px>
+                    <img src="{% static 'images/productos/ciclismo/CI1.png' %}" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/productos/ciclismo/CI3.png" class="d-block w-100" width=400px height=350px>
+                    <img src="{% static 'images/productos/ciclismo/CI3.png' %}" class="d-block w-100" width=400px height=350px>
                 </div>
                 <div class="carousel-item">
-                    <img src="images/productos/ciclismo/CI4.png" class="d-block w-100" width=400px height=350px>
+                    <img src="{% static 'images/productos/ciclismo/CI4.png' %}" class="d-block w-100" width=400px height=350px>
                 </div>
 
                 <!-- Añadir aquí las cuatro imágenes restantes del carrusel -->
@@ -125,7 +39,7 @@
         <div class="row row-cols-1 row-cols-md-3 g-4">
             <div class="col">
                 <div class="card">
-                    <img src="images/productos/adulto/AD2.png" class="card-img-top" alt="...">
+                    <img src="{% static 'images/productos/adulto/AD2.png' %}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Mountain Bike Naranja</h5>
                         <p class="card-text">MOUNTAIN BIKE MONTAGNE 27.5" NARANJO</p>
@@ -136,7 +50,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <img src="images/productos/adulto/AD3.png" class="card-img-top" alt="...">
+                    <img src="{% static 'images/productos/adulto/AD3.png' %}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Mountain Bike Gris</h5>
                         <p class="card-text">BICICLETA MOUNTAIN BIKE ECRINS 27,5" M GRIS</p>
@@ -147,7 +61,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <img src="images/productos/adulto/AD4.png" class="card-img-top" alt="...">
+                    <img src="{% static 'images/productos/adulto/AD4.png' %}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Mountain Bike Rosa</h5>
                         <p class="card-text">BICICLETA MOUNTAIN BIKE DAYA 27.5" ROSA</p>
@@ -158,7 +72,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <img src="images/productos/ciclismo/CI1.png" class="card-img-top" alt="...">
+                    <img src="{% static 'images/productos/ciclismo/CI1.png' %}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Bicicleta Ruta Trek Blanca</h5>
                         <p class="card-text">RUTA TREK MADONE SL 6 GEN 6 BLANCA</p>
@@ -169,7 +83,7 @@
             </div>
             <div class="col">
                 <div class="card">
-                    <img src="images/productos/ciclismo/CI3.png" class="card-img-top" alt="...">
+                    <img src="{% static 'images/productos/ciclismo/CI3.png' %}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Bicicleta Ruta Carbono</h5>
                         <p class="card-text">BICICLETA RUTA LOOK / CARBON FLUO</p>
@@ -179,7 +93,7 @@
                 </div>
             </div><div class="col">
                 <div class="card">
-                    <img src="images/productos/ciclismo/CI4.png" class="card-img-top" alt="...">
+                    <img src="{% static 'images/productos/ciclismo/CI4.png' %}" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title">Bicicleta Ruta Inizio</h5>
                         <p class="card-text">Bicicleta Ruta Team Inizio XS / 48cms</p>
@@ -191,15 +105,4 @@
             <!-- Añadir aquí los otros nueve productos en cards -->
         </div>
     </div>
-
-    <!-- Bootstrap JS y dependencias Popper.js y jQuery (opcional) -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>    
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="scripts.js"></script>
-</body>
-
-</html>
+{% endblock %}

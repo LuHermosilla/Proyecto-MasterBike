@@ -5,9 +5,8 @@
     <div class="container mt-5">
         <h2>Gestión de Empleados</h2>
 
-        <button type="button" class="btn btn-primary">
-            <a href="{% url 'empleados_add' %}"> Agregar </a>
-        </button>
+        <a class="btn btn-primary" href="{% url 'empleados_add' %}"> Agregar </a>
+
         <!-- Listado de Empleados -->
         <div class="mt-5">
             <h3>Listado de Empleados</h3>
@@ -46,6 +45,7 @@
                 </tbody>
             </table>
         </div>
+        
     </div>
 
 {% endblock %}

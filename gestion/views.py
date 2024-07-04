@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from .forms import UserRegisterForm
 from .models import *
+from .Carrito import Carrito
 
 # Create your views here.
 
@@ -42,10 +44,7 @@ def ConsultaStock(request):
     context={}
     return render(request,'gestion/ConsultaStock.html',context)
 
-def CarroDeCompras(request):
-    context={}
-    return render(request,'gestion/CarroDeCompras.html',context)
-
+#Bloque de vistas crud empleados
 def empleados_add(request):
     if request.method != "POST":
         sucursales = Sucursales.objects.all()
@@ -149,13 +148,12 @@ def empleados_update(request):
         context={"empleados":empleados}
         return render(request,"gestion/ListaEmpleados.html",context)
         
-
+#Bloque de vistas crud productos
 def productos_add(request):
     if request.method != "POST":
         categorias = CategoriaProducto.objects.all()
         proveedores = Proveedores.objects.all()
-        productos = Producto.objects.all()
-        context={"categorias":categorias, "proveedores":proveedores, "productos":productos}
+        context={"categorias":categorias, "proveedores":proveedores}
         return render(request,'gestion/AgregarProductos.html',context)
     else:
         nombre=request.POST["nombre"]
@@ -168,22 +166,22 @@ def productos_add(request):
         objCategoria = CategoriaProducto.objects.get(id_categoria = categoria)
         objProveedor = Proveedores.objects.get(id_proveedor = proveedor)
         
-        producto = Producto.objects.create(nombre_prod=nombre,
+        prod = Producto.objects.create(nombre_prod=nombre,
                                             id_categoria=objCategoria,
                                             precio_unit=precio_unit,
                                             impuesto=impuesto,
                                             stock_actual=stock_actual,
                                             id_proveedor=objProveedor)
-        producto.save()
-    
-        context={'mensaje':"Ok, datos grabados..."}
+        prod.save()
+
+        categorias = CategoriaProducto.objects.all()
+        proveedores = Proveedores.objects.all()
+        context={'mensaje':"Ok, datos grabados...","categorias":categorias, "proveedores":proveedores}
         return render(request,'gestion/AgregarProductos.html',context)
     
 def productos_list(request):
-    categorias = CategoriaProducto.objects.all()
-    proveedores = Proveedores.objects.all()
     productos = Producto.objects.all()
-    context={"categorias":categorias, "proveedores":proveedores, "productos":productos}
+    context={"productos":productos}
     return render(request,'gestion/ListaProductos.html',context)
 
 def productos_del(request,pk):
@@ -209,6 +207,7 @@ def productos_edit(request,pk):
         categorias = CategoriaProducto.objects.all()
         proveedores = Proveedores.objects.all()
         producto=Producto.objects.get(id_producto=pk)
+        
         context={"categorias":categorias,"proveedores":proveedores,"producto":producto}
         if producto:
             return render(request,'gestion/EditarProductos.html',context)
@@ -217,9 +216,9 @@ def productos_edit(request,pk):
             return render(request,'gestion/ListaProductos.html',context)
 
 def productos_update(request):
-    categorias = CategoriaProducto.objects.all()
-    proveedores = Proveedores.objects.all()
+    
     if request.method == "POST":
+        id_prod=request.POST["id_producto"]
         nombre=request.POST["nombre"]
         categoria=request.POST["categoria"]
         precio_unit=request.POST["precio_unitario"]
@@ -231,28 +230,33 @@ def productos_update(request):
         objProveedor = Proveedores.objects.get(id_proveedor = proveedor)
         
         producto = Producto()
-        producto.nombre_prod=nombre,
-        producto.id_categoria=objCategoria,
-        producto.precio_unit=precio_unit,
-        producto.impuesto=impuesto,
-        producto.stock_actual=stock_actual,
+        producto.id_producto=id_prod
+        producto.nombre_prod=nombre
+        producto.precio_unit=precio_unit
+        producto.impuesto=impuesto
+        producto.stock_actual=stock_actual
         producto.id_proveedor=objProveedor
+        producto.id_categoria=objCategoria
         producto.save()
+        producto = Producto.objects.get(id_producto=id_prod)
         
-        context={'mensaje':"Ok, datos actualizados...","categorias":categorias,"proveedores":proveedores,"productos":productos}
+        categorias = CategoriaProducto.objects.all()
+        proveedores = Proveedores.objects.all()
+        context={'mensaje':"Ok, datos actualizados...","categorias":categorias,"proveedores":proveedores,"producto":producto}
         return render(request,"gestion/EditarProductos.html",context)
     else:
         productos=Producto.objects.all()
         context={"productos":productos}
         return render(request,"gestion/ListaProductos.html",context)
-    
-def Login(request):
-    context={}
-    return render(request,'gestion/Login.html',context)
 
+    
 def Productos(request):
     context={}
     return render(request,'gestion/Productos.html',context)
+
+def Perfiles(request):
+    context={}
+    return render(request,'gestion/Perfiles.html',context)
 
 def RegistroClientes(request):
     context={}
@@ -265,3 +269,32 @@ def SolicitudArriendo(request):
 def SolicitudReparacion(request):
     context={}
     return render(request,'gestion/SolicitudReparacion.html',context)
+
+
+#bloque funciones carrito de compra
+def tienda(request):
+    productos = Producto.objects.all()
+    return render(request, "gestion/CarroDeCompras.html", {"productos": productos})
+
+def agregar_producto(request,producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id_producto=producto_id)
+    carrito.agregar(producto)
+    return redirect("tienda")
+
+def eliminar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id_producto=producto_id)
+    carrito.eliminar(producto)
+    return redirect("tienda")
+
+def restar_producto(request, producto_id):
+    carrito = Carrito(request)
+    producto = Producto.objects.get(id_producto=producto_id)
+    carrito.restar(producto)
+    return redirect("tienda")
+
+def limpiar_carrito(request):
+    carrito = Carrito(request)
+    carrito.limpiar()
+    return redirect("tienda")

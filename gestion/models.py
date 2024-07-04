@@ -1,8 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Clientes(models.Model):
+class Cliente(models.Model):
     id_cliente = models.IntegerField(primary_key=True),
     nombre_cli = models.CharField(max_length=20),
     aPaterno_cli = models.CharField(max_length=20),
@@ -10,9 +11,8 @@ class Clientes(models.Model):
     rut = models.CharField(unique=True,blank=False,null=False),
     direccion = models.CharField(max_length=50,blank=True,null=True),
     telefono = models.CharField(max_length=15),
-    email = models.EmailField(max_length=100,unique=True),
-    fecha_registro = models.DateField(blank=False,null=False),
-    clave = models.CharField(max_length=100,blank=False,null=False)
+    email = models.ForeignKey('User',on_delete=models.CASCADE,db_column='email'),
+    fecha_registro = models.DateField()
     
 class Proveedores(models.Model):
     id_proveedor = models.IntegerField(primary_key=True)
@@ -26,13 +26,16 @@ class CategoriaProducto(models.Model):
     id_categoria = models.IntegerField(primary_key=True)
     nombre_categoria = models.CharField(max_length=20)
     
+    def __str__(self):
+        return str(self.nombre_categoria)
+    
 class Producto(models.Model):
     id_producto = models.IntegerField(primary_key=True)
     nombre_prod = models.CharField(max_length=20)
     id_categoria = models.ForeignKey('CategoriaProducto',on_delete=models.CASCADE, db_column='id_categoria')
-    precio_unit = models.IntegerField(9)
-    impuesto = models.IntegerField(9)
-    stock_actual = models.IntegerField(9)
+    precio_unit = models.IntegerField()
+    impuesto = models.IntegerField()
+    stock_actual = models.IntegerField()
     id_proveedor = models.ForeignKey('Proveedores',on_delete=models.CASCADE, db_column='id_proveedor')
     
 class Inventario(models.Model):
@@ -54,6 +57,7 @@ class Empleado(models.Model):
     aMaterno_emp = models.CharField(max_length=20)
     rut_emp = models.IntegerField(8)
     dv = models.IntegerField(1)
+    email = models.ForeignKey('User',on_delete=models.CASCADE,db_column='email'),
     id_cargo = models.ForeignKey('Cargos',on_delete=models.CASCADE, db_column='id_cargo')
     id_sucursal = models.ForeignKey('Sucursales',on_delete=models.CASCADE, db_column='id_sucursal')
     
@@ -63,7 +67,7 @@ class EstadosPedido(models.Model):
     
 class Pedidos(models.Model):
     id_pedido= models.IntegerField(primary_key=True)
-    id_cliente= models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
+    id_cliente= models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
     id_empleado= models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
     fecha_pedido= models.DateField(blank=False,null=False)
     estado_pedido= models.ForeignKey('EstadosPedido',on_delete=models.CASCADE, db_column='id_estado')
@@ -112,7 +116,7 @@ class EstadosArriendo(models.Model):
     
 class Arriendos(models.Model):
     id_arriendo = models.IntegerField(primary_key=True)
-    id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
+    id_cliente = models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
     id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
     fecha_inicio = models.DateField(blank=False,null=False)
     fecha_fin = models.DateField(blank=False,null=False)
@@ -126,7 +130,7 @@ class EstadosReparacion(models.Model):
     
 class Reparaciones(models.Model):
     id_reparacion = models.IntegerField(primary_key=True),
-    id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
+    id_cliente = models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
     id_empleado = models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
     fecha_solicitud = models.DateField(blank=False,null=False),
     fecha_reparacion = models.DateField(blank=False,null=False),
@@ -136,7 +140,7 @@ class Reparaciones(models.Model):
     
 class HistorialMantenciones(models.Model):
     id_historial = models.IntegerField(primary_key=True),
-    id_cliente = models.ForeignKey('Clientes',on_delete=models.CASCADE, db_column='id_cliente')
+    id_cliente = models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
     id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
     fecha_mantencion = models.DateField(blank=False,null=False),
     descripcion_mantencion = models.CharField(max_length=200)
@@ -162,3 +166,6 @@ class Promociones(models.Model):
     fecha_fin = models.DateField(blank=False,null=False)
     descuento = models.IntegerField(9)
     tipo_promocion = models.ForeignKey('TipoPromocion',on_delete=models.CASCADE, db_column='id_tipo_promo')
+    
+
+

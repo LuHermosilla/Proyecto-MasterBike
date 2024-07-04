@@ -50,6 +50,11 @@
             <button type="submit" class="btn btn-primary">Guardar</button>
             <button type="reset" class="btn btn-primary">Eliminar</button>
         </form>
-
+        <a href="{% url 'productos_list' %}"> Volver </a>
+        <div id="idMensajes">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

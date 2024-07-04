@@ -70,7 +70,7 @@
                         <b>Supervisor</b>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                        <a class="dropdown-item" href="ListaEmpleados.html">Gestion Empleados</a>
+                        <a class="dropdown-item" href="{% url 'empleados_list' %}">Gestion Empleados</a>
                         <a class="dropdown-item" href="Perfiles.html">Perfiles</a>
                         <a class="dropdown-item" href="CompraProveedores.html">Compras</a>
                         <a class="dropdown-item" href="DevolucionCambios.html">Devoluciones</a>
@@ -83,7 +83,7 @@
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Buscar">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
-            <a class="nav-link" href="CarroDeCompras.html">
+            <a class="nav-link" href="{% url 'tienda' %}">
                 <i class="fas fa-shopping-cart"></i> Carro <span class="badge badge-pill badge-danger">0</span>
             </a>
             <a class="nav-link" href="https://wa.me/56993257713?text=Hola, quisiera comunicarme con ustedes." target="_blank"> 

@@ -14,6 +14,9 @@ def index(request):
     context = {'user':user}                                                           
     return render(request,'gestion/index.html',context)
 
+def error_404(request, exception):
+    return render(request, 'gestion/error404.html', status=404)
+
 def login_sesion(request):
     if request.method == "POST":
         username = request.POST["username"]

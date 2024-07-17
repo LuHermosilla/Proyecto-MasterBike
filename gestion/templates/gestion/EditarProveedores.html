@@ -1,0 +1,55 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center">Editar Proveedores</h2>
+        
+        <form action="{% url 'proveedores_update' %}" id="productForm" class="mb-4" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label for="id_proveedor">ID</label>
+                    <input type="text" class="form-control" name="id_proveedor" value="{{proveedor.id_proveedor}}">
+                </div>
+                <div class="form-group col-md-5">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" value="{{proveedor.nombre_prov}}" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="rut">RUT</label>
+                    <input type="text" class="form-control" name="rut" value="{{proveedor.rut_prov}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="direccion">Direccion</label>
+                    <input type="text" class="form-control" name="direccion" value="{{proveedor.direccion}}" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="telefono">Telefono</label>
+                    <input type="number" class="form-control" name="telefono" value="{{proveedor.telefono}}" required>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="PaginaWeb">Pagina Web</label>
+                    <input type="text" class="form-control" name="PaginaWeb" value="{{proveedor.pagina_web}}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" name="email" value="{{proveedor.email}}" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="reset" class="btn btn-primary">Eliminar</button>
+        </form>
+        <a class="btn btn-primary" href="{% url 'proveedores_list' %}"> Volver </a>
+        <div id="idMensajes">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center">Gestión de Proveedor</h2>
+        <a class="btn btn-primary" href="{% url 'proveedores_add' %}"> Agregar Proveedor</a>
+        <br><br>
+        <!-- Tabla para listar proveedores -->
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Rut</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Pagina web</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="productTable">
+                {% for proveedor in proveedores %}
+                    <tr>
+                        <td>{{proveedor.id_proveedor}}</td>
+                        <td>{{proveedor.nombre_prov}}</td>
+                        <td>{{proveedor.rut_prov}}</td>
+                        <td>{{proveedor.direccion}}</td>
+                        <td>{{proveedor.telefono}}</td>
+                        <td>{{proveedor.pagina_web}}</td>
+                        <td>{{proveedor.email}}</td>
+                        <td>
+                            <button class="btn btn-warning btn-sm"><a href="{% url 'proveedores_edit' pk=proveedor.id_proveedor %}">Editar</a></button>
+                            <button class="btn btn-danger btn-sm"><a href="{% url 'proveedores_del' pk=proveedor.id_proveedor %}">Eliminar</a></button>
+                        </td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

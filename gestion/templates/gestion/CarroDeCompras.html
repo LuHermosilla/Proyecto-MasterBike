@@ -5,7 +5,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12 align-self-center"><h1 class="display-1">TIENDA</h1></div>
+        <div class="col-12 align-self-center"><h2 class="display-1">Productos</h2></div>
     </div>
     <div class="row">
         <div class="col-8">
@@ -19,7 +19,7 @@
                                     <h5 class="card-title">{{producto.nombre_prod}}</h5>
                                     <p class="card-text">{{producto.id_categoria.nombre_categoria}}</p>
                                     <p class="card-text">${{producto.precio_unit}}</p>
-                                    <a href="{% url 'Add' producto.id_producto %}" class="btn btn-primary">Agregar al carrito</a>
+                                    <a href="{% url 'carrito_Add' producto.id_producto %}" class="btn btn-primary">Agregar al carrito</a>
                                 </div>
                             </div>
                         </div>

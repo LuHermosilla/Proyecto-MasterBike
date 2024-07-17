@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+
 
 # Create your models here.
 
@@ -9,18 +11,22 @@ class Cliente(models.Model):
     aPaterno_cli = models.CharField(max_length=20),
     aMaterno_cli = models.CharField(max_length=20),
     rut = models.CharField(unique=True,blank=False,null=False),
-    direccion = models.CharField(max_length=50,blank=True,null=True),
+    direccion = models.CharField(max_length=50),
     telefono = models.CharField(max_length=15),
-    email = models.ForeignKey('User',on_delete=models.CASCADE,db_column='email'),
-    fecha_registro = models.DateField()
+    fecha_registro = models.DateTimeField(default=timezone.now)
     
-class Proveedores(models.Model):
+    
+class Proveedor(models.Model):
     id_proveedor = models.IntegerField(primary_key=True)
     nombre_prov = models.CharField(max_length=40)
-    rut_prov = models.CharField(max_length=20, unique=True)
+    rut_prov = models.CharField(max_length=20)
     direccion = models.CharField(max_length=50)
     telefono = models.CharField(max_length=15)
-    email = models.EmailField(max_length=100,unique=True)
+    pagina_web = models.URLField(max_length=200)
+    email = models.EmailField(max_length=100)
+    
+    def __str__(self):
+        return str(self.nombre_prov)
     
 class CategoriaProducto(models.Model):
     id_categoria = models.IntegerField(primary_key=True)
@@ -36,7 +42,7 @@ class Producto(models.Model):
     precio_unit = models.IntegerField()
     impuesto = models.IntegerField()
     stock_actual = models.IntegerField()
-    id_proveedor = models.ForeignKey('Proveedores',on_delete=models.CASCADE, db_column='id_proveedor')
+    id_proveedor = models.ForeignKey('Proveedor',on_delete=models.CASCADE, db_column='id_proveedor')
     
 class Inventario(models.Model):
     id_inventario = models.IntegerField(primary_key=True)
@@ -50,14 +56,16 @@ class Sucursales(models.Model):
     direccion = models.CharField(max_length=50)
     telefono = models.CharField(max_length=15)
     
+    def __str__(self):
+        return str(self.nombre_sucursal)
+    
 class Empleado(models.Model):
     id_empleado = models.IntegerField(primary_key=True)
     nombre_emp = models.CharField(max_length=20)
     aPaterno_emp = models.CharField(max_length=20)
     aMaterno_emp = models.CharField(max_length=20)
-    rut_emp = models.IntegerField(8)
-    dv = models.IntegerField(1)
-    email = models.ForeignKey('User',on_delete=models.CASCADE,db_column='email'),
+    rut_emp = models.IntegerField()
+    dv = models.IntegerField()
     id_cargo = models.ForeignKey('Cargos',on_delete=models.CASCADE, db_column='id_cargo')
     id_sucursal = models.ForeignKey('Sucursales',on_delete=models.CASCADE, db_column='id_sucursal')
     
@@ -65,10 +73,12 @@ class EstadosPedido(models.Model):
     id_estado = models.IntegerField(primary_key=True)
     estado_pedido = models.CharField(max_length=20)
     
+    def __str__(self):
+        return str(self.estado_pedido)
+    
 class Pedidos(models.Model):
     id_pedido= models.IntegerField(primary_key=True)
     id_cliente= models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
-    id_empleado= models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
     fecha_pedido= models.DateField(blank=False,null=False)
     estado_pedido= models.ForeignKey('EstadosPedido',on_delete=models.CASCADE, db_column='id_estado')
     
@@ -90,6 +100,9 @@ class Ventas(models.Model):
 class Cargos(models.Model):
     id_cargo = models.IntegerField(primary_key=True)
     cargo_emp = models.CharField(max_length=20) 
+    
+    def __str__(self):
+        return str(self.cargo_emp)
     
 class EstadoEnvios(models.Model):
     id_estado_envio = models.IntegerField(primary_key=True)
@@ -167,5 +180,4 @@ class Promociones(models.Model):
     descuento = models.IntegerField(9)
     tipo_promocion = models.ForeignKey('TipoPromocion',on_delete=models.CASCADE, db_column='id_tipo_promo')
     
-
 

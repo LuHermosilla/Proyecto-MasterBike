@@ -1,0 +1,22 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h2 class="text-center">Gestión de Proveedores</h2>
+        
+        <form action="proveedores_add" id="productForm" class="mb-4" method="POST">
+            {% csrf_token %}
+            {{ form.as_div }}
+            <br>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <button type="reset" class="btn btn-primary">Eliminar</button>
+        </form>
+        <a class="btn btn-primary" href="{% url 'proveedores_list' %}"> Volver </a>
+        <div id="idMensajes">
+            {% if mensaje %}
+            {{mensaje}}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

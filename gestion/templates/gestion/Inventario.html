@@ -23,46 +23,13 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-tipo="Bicicletas">
-                    <td>Bicicleta de Montaña</td>
-                    <td>Bicicletas</td>
-                    <td>10</td>
-                </tr>
-                <tr data-tipo="Bicicletas">
-                    <td>Bicicleta de Ruta</td>
-                    <td>Bicicletas</td>
-                    <td>5</td>
-                </tr>
-                <tr data-tipo="Accesorios">
-                    <td>Casco</td>
-                    <td>Accesorios</td>
-                    <td>20</td>
-                </tr>
-                <tr data-tipo="Accesorios">
-                    <td>Guantes</td>
-                    <td>Accesorios</td>
-                    <td>15</td>
-                </tr>
-                <tr data-tipo="Partes">
-                    <td>Cadena</td>
-                    <td>Partes</td>
-                    <td>25</td>
-                </tr>
-                <tr data-tipo="Partes">
-                    <td>Pedales</td>
-                    <td>Partes</td>
-                    <td>30</td>
-                </tr>
-                <tr data-tipo="Arriendos">
-                    <td>Arriendo Bicicleta de Montaña</td>
-                    <td>Arriendos</td>
-                    <td>3</td>
-                </tr>
-                <tr data-tipo="Arriendos">
-                    <td>Arriendo Bicicleta de Ruta</td>
-                    <td>Arriendos</td>
-                    <td>2</td>
-                </tr>
+                {% for producto in productos %}
+                    <tr data-tipo="{{producto.id_categoria.nombre_categoria}}">
+                        <td>{{producto.nombre_prod}}</td>
+                        <td>{{producto.id_categoria.nombre_categoria}}</td>
+                        <td>{{producto.stock_actual}}</td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

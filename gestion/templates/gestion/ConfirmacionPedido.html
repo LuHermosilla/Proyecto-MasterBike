@@ -1,0 +1,61 @@
+{% extends 'gestion/base.html' %}
+{% load static %}
+
+{% block content %}
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+            <th scope="row" colspan="3" class="text-center">CARRITO</th>
+            </tr>
+            <tr>
+            <th scope="col">NOMBRE</th>
+            <th scope="col">PRECIO</th>
+            <th scope="col">CANTIDAD</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+        {% if request.session.carrito.items %}
+        {% for key, value in request.session.carrito.items %}
+        <tr>
+            <td>{{value.nombre}}</td>
+            <td>{{value.acumulado}}</td>
+            <td>{{value.cantidad}}
+            <a href="{% url 'carrito_Add' value.producto_id %}" class="badge btn btn-dark badge-dark">+</a>
+            <a href="{% url 'carrito_Sub' value.producto_id %}" class="badge btn btn-dark badge-dark">-</a>
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="rut">Rut</label>
+            <input type="number" class="form-control" name="rut" value="{{usuario.numRut}}">
+        </div>
+        <div class="form-group col-md-3">
+            <label for="direccion">Direccion</label>
+            <input type="text" class="form-control" name="direccion" value="{{usuario.direccion}}" required>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="telefono">Telefono</label>
+            <input type="text" class="form-control" name="telefono" value="{{usuario.telefono}}" required>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+<a class="btn btn-primary" href="{% url 'generar_pedido' %}"> Realizar Pago </a>
+<div>
+
+</div>
+
+
+
+
+
+{% endblock %}

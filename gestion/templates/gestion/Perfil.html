@@ -1,0 +1,65 @@
+{% extends 'gestion/base.html' %}
+
+{% block content %}
+<div class="container justify-content">
+    {% if request.user.is_authenticated %}
+        <h1>Perfil</h1>
+        <form action="{% url 'perfil' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="first_name">Nombre</label>
+                    {{form.first_name}}
+                </div>
+                <div class="col-md-1"></div>
+                <div class="form-group col-md-3">
+                    <label for="last_name">Apellido</label>
+                    {{form.last_name}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="numRut">Rut</label>
+                    {{form.numRut}}
+                </div>
+                <div>
+                    <p>-</p>
+                    <p>-</p>
+                </div>
+                <div class="form-group col-md-1">
+                    <label for="dvRut">DV</label>
+                    {{form.dvRut}}
+                </div>  
+                <div class="col-md-1"></div>
+                <div class="form-group col-md-3">
+                    <label for="email">Email</label>
+                    {{form.email}}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="direccion">Direccion</label>
+                    {{form.direccion}}
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="telefono">Telefono</label>
+                    {{form.telefono}}
+                </div>
+                
+            </div>
+            <div  class="d-grid gap-2 col-md-7">
+                <input type="submit" class="btn btn-primary" name="opcion" value="Editar">
+            </div>
+        </form>
+        <br><br>
+        <br>
+        <div id="idMensaje">
+            {% if mensaje %}
+                {{mensaje}}
+            {% endif %}
+        </div>
+        <br>
+        <a class="btn btn-primary" href="{% url 'index' %}">Volver</a>
+    {% endif %}
+</div>
+{% endblock%}

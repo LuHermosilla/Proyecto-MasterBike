@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
-from .forms import UserRegisterForm
+from django.contrib.auth import authenticate, login, logout,get_user_model
+from .forms import *
 from .models import *
 from .Carrito import Carrito
 
@@ -39,46 +38,67 @@ def logout_sesion(request):
         print("Error, no se pudo cerrar sesion...")
         return redirect('index')
 
-def Agendar(request):
-    context={}
-    return render(request,'gestion/Agendar.html',context)
+@login_required
+def perfil(request):
+    try:
+        User = get_user_model()
+        print(User)
+        user = User.objects.get(username=request.user)
+        print(user)
+        context = {}
+        if user:
+            print("Perfil...")
+            if request.method == "POST":
+                print("Edit, es un post...")
+                form = UsuarioForm(request.POST,instance=request.user)
+                form.save()
+                return redirect('index')
+            else:
+                print("Edit, no es un post...")
+                form = UsuarioForm(instance=request.user)
+                print("Edit, no es un post...")
+                mensaje = ""
+                context = {"user":user,"form":form,"mensaje":mensaje}
+                print("Edit, no es un post...")
+                return render(request,'gestion/Perfil.html',context)
+    except:
+        print("Error, perfil no existe...")
+        return redirect('index')
 
-def ConsultaStock(request):
-    context={}
-    return render(request,'gestion/ConsultaStock.html',context)
+def registro(request):
+    data = {
+        'form': CustomUserCreationForm()
+    }
+
+    if request.method == 'POST':
+        user_creation_form = CustomUserCreationForm(data=request.POST)
+
+        if user_creation_form.is_valid():
+            user_creation_form.save()
+
+            user = authenticate(username=user_creation_form.cleaned_data['username'], password=user_creation_form.cleaned_data['password1'])
+            login(request, user)
+            return redirect('index')
+
+    return render(request, 'gestion/Registro_usuario.html', data)
 
 #Bloque de vistas crud empleados
+@login_required
 def empleados_add(request):
-    if request.method != "POST":
-        sucursales = Sucursales.objects.all()
-        cargos = Cargos.objects.all()
-        empleados = Empleado.objects.all()
-        context={"sucursales":sucursales,"cargos":cargos,"empleados":empleados}
-        return render(request,'gestion/AgregarEmpleados.html',context)
-    else:
-        nombre=request.POST["nombre"]
-        aPaterno=request.POST["apellidoPat"]
-        aMaterno=request.POST["apellidoMat"]
-        rut=int(request.POST["rut"])
-        dv=request.POST["dv"]
-        cargo=request.POST["cargo"]
-        sucursal=request.POST["sucursal"]
-        
-        objCargo=Cargos.objects.get(id_cargo=cargo)
-        objSucursal=Sucursales.objects.get(id_sucursal=sucursal)
-        
-        empleado = Empleado.objects.create(nombre_emp=nombre,
-                                            aPaterno_emp=aPaterno,
-                                            aMaterno_emp=aMaterno,
-                                            rut_emp=rut,
-                                            dv=dv,
-                                            id_cargo=objCargo,
-                                            id_sucursal=objSucursal)
-        empleado.save()
-    
-        context={'mensaje':"Ok, datos grabados..."}
-        return render(request,'gestion/AgregarEmpleados.html',context)
+    context = {'form':EmpleadosForm}
+    if request.method == 'POST':
+        prov_creation_form = EmpleadosForm(data=request.POST)
 
+        if prov_creation_form.is_valid():
+            prov_creation_form.save()
+
+            return redirect('empleados_list')
+        else:
+            context['form'] = prov_creation_form
+
+    return render(request,'gestion/AgregarEmpleados.html',context)
+
+@login_required
 def empleados_list(request):
     sucursales = Sucursales.objects.all()
     cargos = Cargos.objects.all()
@@ -86,7 +106,8 @@ def empleados_list(request):
     
     context={"sucursales":sucursales,"cargos":cargos,"empleados":empleados}
     return render(request,'gestion/ListaEmpleados.html',context)
-    
+
+@login_required
 def empleados_del(request,pk):
     sucursales = Sucursales.objects.all()
     cargos = Cargos.objects.all()
@@ -104,7 +125,8 @@ def empleados_del(request,pk):
         empleados = Empleado.objects.all()
         context={"sucursales":sucursales,"cargos":cargos,"empleados":empleados}
         return render(request,'gestion/ListaEmpleados.html',context)
-    
+
+@login_required
 def empleados_edit(request,pk):
     sucursales = Sucursales.objects.all()
     cargos = Cargos.objects.all()
@@ -117,12 +139,13 @@ def empleados_edit(request,pk):
         else:
             context={'mensaje':"Error, id no existe..."}
             return render(request,'gestion/ListaEmpleados.html',context)
-    
+
+@login_required  
 def empleados_update(request):
-    sucursales = Sucursales.objects.all()
-    cargos = Cargos.objects.all()
+
     
     if request.method == "POST":
+        id_emp=request.POST["id_empleado"]
         nombre=request.POST["nombre"]
         aPaterno=request.POST["apellidoPat"]
         aMaterno=request.POST["apellidoMat"]
@@ -142,9 +165,14 @@ def empleados_update(request):
         empleado.dv=dv
         empleado.id_cargo=objCargo
         empleado.id_sucursal=objSucursal
-        
         empleado.save()
-        context={'mensaje':"Ok, datos actualizados...","sucursales":sucursales,"cargos":cargos,"empleado":empleado}
+        empleado = Empleado.objects.get(id_empleado=id_emp)
+        
+        empleados = Empleado.objects.all()
+        sucursales = Sucursales.objects.all()
+        cargos = Cargos.objects.all()
+        
+        context={'mensaje':"Ok, datos actualizados...","sucursales":sucursales,"cargos":cargos,"empleado":empleado,"empleados":empleados}
         return render(request,'gestion/EditarEmpleados.html',context)
     else:
         empleados =Empleado.objects.all()
@@ -152,44 +180,31 @@ def empleados_update(request):
         return render(request,"gestion/ListaEmpleados.html",context)
         
 #Bloque de vistas crud productos
+@login_required
 def productos_add(request):
-    if request.method != "POST":
-        categorias = CategoriaProducto.objects.all()
-        proveedores = Proveedores.objects.all()
-        context={"categorias":categorias, "proveedores":proveedores}
-        return render(request,'gestion/AgregarProductos.html',context)
-    else:
-        nombre=request.POST["nombre"]
-        categoria=request.POST["categoria"]
-        precio_unit=request.POST["precio_unitario"]
-        impuesto=request.POST["impuesto"]
-        stock_actual=request.POST["stock_actual"]
-        proveedor=request.POST["id_proveedor"]
-        
-        objCategoria = CategoriaProducto.objects.get(id_categoria = categoria)
-        objProveedor = Proveedores.objects.get(id_proveedor = proveedor)
-        
-        prod = Producto.objects.create(nombre_prod=nombre,
-                                            id_categoria=objCategoria,
-                                            precio_unit=precio_unit,
-                                            impuesto=impuesto,
-                                            stock_actual=stock_actual,
-                                            id_proveedor=objProveedor)
-        prod.save()
+    context = {'form':ProductoForm}
+    if request.method == 'POST':
+        prov_creation_form = ProductoForm(data=request.POST)
 
-        categorias = CategoriaProducto.objects.all()
-        proveedores = Proveedores.objects.all()
-        context={'mensaje':"Ok, datos grabados...","categorias":categorias, "proveedores":proveedores}
-        return render(request,'gestion/AgregarProductos.html',context)
-    
+        if prov_creation_form.is_valid():
+            prov_creation_form.save()
+
+            return redirect('productos_list')
+        else:
+            context['form'] = prov_creation_form
+
+    return render(request, 'gestion/AgregarProductos.html', context)
+ 
+@login_required   
 def productos_list(request):
     productos = Producto.objects.all()
     context={"productos":productos}
     return render(request,'gestion/ListaProductos.html',context)
 
+@login_required
 def productos_del(request,pk):
     categorias = CategoriaProducto.objects.all()
-    proveedores = Proveedores.objects.all()
+    proveedores = Proveedor.objects.all()
     
     context={}
     
@@ -205,10 +220,11 @@ def productos_del(request,pk):
         context={"categorias":categorias,"proveedores":proveedores,"productos":productos}
         return render(request,'gestion/ListaProductos.html',context)
 
+@login_required
 def productos_edit(request,pk):
     if pk != "":
         categorias = CategoriaProducto.objects.all()
-        proveedores = Proveedores.objects.all()
+        proveedores = Proveedor.objects.all()
         producto=Producto.objects.get(id_producto=pk)
         
         context={"categorias":categorias,"proveedores":proveedores,"producto":producto}
@@ -218,6 +234,7 @@ def productos_edit(request,pk):
             context={'mensaje':"Error, id no existe"}
             return render(request,'gestion/ListaProductos.html',context)
 
+@login_required
 def productos_update(request):
     
     if request.method == "POST":
@@ -230,7 +247,7 @@ def productos_update(request):
         proveedor=request.POST["id_proveedor"]
         
         objCategoria = CategoriaProducto.objects.get(id_categoria = categoria)
-        objProveedor = Proveedores.objects.get(id_proveedor = proveedor)
+        objProveedor = Proveedor.objects.get(id_proveedor = proveedor)
         
         producto = Producto()
         producto.id_producto=id_prod
@@ -244,7 +261,7 @@ def productos_update(request):
         producto = Producto.objects.get(id_producto=id_prod)
         
         categorias = CategoriaProducto.objects.all()
-        proveedores = Proveedores.objects.all()
+        proveedores = Proveedor.objects.all()
         context={'mensaje':"Ok, datos actualizados...","categorias":categorias,"proveedores":proveedores,"producto":producto}
         return render(request,"gestion/EditarProductos.html",context)
     else:
@@ -252,27 +269,88 @@ def productos_update(request):
         context={"productos":productos}
         return render(request,"gestion/ListaProductos.html",context)
 
+#Bloque de vistas crud proveedores
+@login_required 
+def proveedores_add(request):
+    context = {'form':ProveedorForm}
+    if request.method == 'POST':
+        prov_creation_form = ProveedorForm(data=request.POST)
+
+        if prov_creation_form.is_valid():
+            prov_creation_form.save()
+
+            return redirect('proveedores_list')
+        else:
+            context['form'] = prov_creation_form
+
+    return render(request, 'gestion/AgregarProveedores.html', context)
+
+@login_required    
+def proveedores_list(request):
+    proveedores = Proveedor.objects.all()
+    context={"proveedores":proveedores}
+    return render(request,'gestion/ListaProveedores.html',context)
+
+@login_required
+def proveedores_del(request,pk):
     
-def Productos(request):
     context={}
-    return render(request,'gestion/Productos.html',context)
+    
+    try:
+        proveedor=Proveedor.objects.get(id_proveedor=pk)
+        
+        proveedor.delete()
+        proveedores = Proveedor.objects.all()
+        context={"proveedores":proveedores}
+        return render(request,'gestion/ListaProveedores.html',context)
+    except:
+        proveedores = Proveedor.objects.all()
+        context={"proveedores":proveedores}
+        return render(request,'gestion/ListaProveedores.html',context)
 
-def Perfiles(request):
-    context={}
-    return render(request,'gestion/Perfiles.html',context)
+@login_required
+def proveedores_edit(request,pk):
+    if pk != "":
+        proveedor=Proveedor.objects.get(id_proveedor=pk)
+        
+        context={"proveedor":proveedor}
+        if proveedor:
+            return render(request,'gestion/EditarProveedores.html',context)
+        else:
+            context={'mensaje':"Error, id no existe"}
+            return render(request,'gestion/ListaProveedores.html',context)
 
-def RegistroClientes(request):
-    context={}
-    return render(request,'gestion/RegistroClientes.html',context)
-
-def SolicitudArriendo(request):
-    context={}
-    return render(request,'gestion/SolicitudArriendo.html',context)
-
-def SolicitudReparacion(request):
-    context={}
-    return render(request,'gestion/SolicitudReparacion.html',context)
-
+@login_required
+def proveedores_update(request):
+    
+    if request.method == "POST":
+        id_prov=request.POST["id_proveedor"]
+        nombre=request.POST["nombre"]
+        rut=request.POST["rut"]
+        direccion=request.POST["direccion"]
+        telefono=request.POST["telefono"]
+        web=request.POST["PaginaWeb"]
+        email=request.POST["email"]
+        
+        
+        proveedor = Proveedor()
+        proveedor.id_proveedor=id_prov
+        proveedor.nombre_prov=nombre
+        proveedor.rut_prov=rut
+        proveedor.direccion=direccion
+        proveedor.telefono=telefono
+        proveedor.pagina_web=web
+        proveedor.email=email
+        proveedor.save()
+        
+        proveedor = Proveedor.objects.get(id_proveedor=id_prov)
+        
+        context={'mensaje':"Ok, datos actualizados...","proveedor":proveedor}
+        return render(request,"gestion/EditarProveedores.html",context)
+    else:
+        proveedores=Proveedor.objects.all()
+        context={"proveedores":proveedores}
+        return render(request,"gestion/ListaProveedores.html",context)
 
 #bloque funciones carrito de compra
 def tienda(request):
@@ -301,3 +379,40 @@ def limpiar_carrito(request):
     carrito = Carrito(request)
     carrito.limpiar()
     return redirect("tienda")
+
+#despacho
+def mostrar_despachos(request):
+    context={}
+    return render(request,'gestion/Despacho.html',context)
+
+def Inventario(request):
+    productos = Producto.objects.all()
+    context={"productos":productos}
+    return render(request,'gestion/Inventario.html',context)
+
+#ventas
+def procesar_carrito(request):
+    carrito = Carrito(request)
+    User = get_user_model()
+    usuario = User.objects.get(username=request.user)
+    
+    context = {"usuario":usuario}
+    return render(request,"gestion/ConfirmacionPedido.html",context)
+
+#TO DO
+
+def SolicitudArriendo(request):
+    context={}
+    return render(request,'gestion/SolicitudArriendo.html',context)
+
+def SolicitudReparacion(request):
+    context={}
+    return render(request,'gestion/SolicitudReparacion.html',context)
+
+def Agendar(request):
+    context={}
+    return render(request,'gestion/Agendar.html',context)
+
+def ConsultaStock(request):
+    context={}
+    return render(request,'gestion/ConsultaStock.html',context)

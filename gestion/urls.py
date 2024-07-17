@@ -6,10 +6,10 @@ urlpatterns = [
     
     #carrito de compra
     path('tienda', views.tienda, name='tienda'),
-    path('agregar_producto/<int:producto_id>/', views.agregar_producto, name="Add"),
+    path('agregar_producto/<int:producto_id>/', views.agregar_producto, name="carrito_Add"),
     path('eliminar_producto/<int:producto_id>/', views.eliminar_producto, name="Del"),
-    path('restar_producto/<int:producto_id>/', views.restar_producto, name="Sub"),
-    path('limpiar_carrito/', views.limpiar_carrito, name="CLS"),
+    path('restar_producto/<int:producto_id>/', views.restar_producto, name="carrito_Sub"),
+    path('limpiar_carrito/', views.limpiar_carrito, name="carrito_CLS"),
     
     #crud empleados
     path('empleados_add', views.empleados_add, name='empleados_add'),
@@ -25,15 +25,31 @@ urlpatterns = [
     path('productos_edit/<str:pk>',views.productos_edit,name='productos_edit'),
     path('productos_update',views.productos_update,name='productos_update'),
     
+    #crud proveedores
+    path('proveedores_add', views.proveedores_add, name='proveedores_add'),
+    path('proveedores_list', views.proveedores_list, name='proveedores_list'),
+    path('proveedores_del/<str:pk>',views.proveedores_del,name='proveedores_del'),
+    path('proveedores_edit/<str:pk>',views.proveedores_edit,name='proveedores_edit'),
+    path('proveedores_update',views.proveedores_update,name='proveedores_update'),
+    
     #login
     path('login_sesion', views.login_sesion, name='login_sesion'),
     path('logout_sesion', views.logout_sesion, name='logout_sesion'),
     
+    #registro
+    path('registro', views.registro, name='registro'),
     
+    #perfil
+    path('perfil', views.perfil, name='perfil'),
+      
+    path('procesar_carrito', views.procesar_carrito, name='procesar_carrito'),
+    
+    
+    path('mostrar_despachos', views.mostrar_despachos, name='mostrar_despachos'),
+    
+    path('Inventario', views.Inventario, name='Inventario'),
     path('ConsultaStock', views.ConsultaStock, name='ConsultaStock'),
     path('Agendar', views.Agendar, name='Agendar'),
-    path('Perfiles', views.Perfiles, name='Perfiles'),
-    path('RegistroClientes', views.RegistroClientes, name='RegistroClientes'),
     path('SolicitudArriendo', views.SolicitudArriendo, name='SolicitudArriendo'),
     path('SolicitudReparacion', views.SolicitudReparacion, name='SolicitudReparacion'),
 ]

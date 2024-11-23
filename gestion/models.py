@@ -6,13 +6,13 @@ from django.utils import timezone
 # Create your models here.
 
 class Cliente(models.Model):
-    id_cliente = models.IntegerField(primary_key=True),
-    nombre_cli = models.CharField(max_length=20),
-    aPaterno_cli = models.CharField(max_length=20),
-    aMaterno_cli = models.CharField(max_length=20),
-    rut = models.CharField(unique=True,blank=False,null=False),
-    direccion = models.CharField(max_length=50),
-    telefono = models.CharField(max_length=15),
+    id_cliente = models.IntegerField(primary_key=True)
+    nombre_cli = models.CharField(max_length=20)
+    aPaterno_cli = models.CharField(max_length=20)
+    aMaterno_cli = models.CharField(max_length=20)
+    rut = models.CharField(unique=True,blank=False,null=False)
+    direccion = models.CharField(max_length=50)
+    telefono = models.CharField(max_length=15)
     fecha_registro = models.DateTimeField(default=timezone.now)
     
     
@@ -142,20 +142,20 @@ class EstadosReparacion(models.Model):
     estado_reparacion = models.CharField(max_length=20)
     
 class Reparaciones(models.Model):
-    id_reparacion = models.IntegerField(primary_key=True),
+    id_reparacion = models.IntegerField(primary_key=True)
     id_cliente = models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
     id_empleado = models.ForeignKey('Empleado',on_delete=models.CASCADE, db_column='id_empleado')
-    fecha_solicitud = models.DateField(blank=False,null=False),
-    fecha_reparacion = models.DateField(blank=False,null=False),
-    descripcion_problema = models.CharField(max_length=200),
+    fecha_solicitud = models.DateField(blank=False,null=False)
+    fecha_reparacion = models.DateField(blank=False,null=False)
+    descripcion_problema = models.CharField(max_length=200)
     estado_reparacion = models.ForeignKey('EstadosReparacion',on_delete=models.CASCADE, db_column='id_estado_reparacion')
-    costo_reparacion = models.IntegerField(9),
+    costo_reparacion = models.IntegerField(9)
     
 class HistorialMantenciones(models.Model):
-    id_historial = models.IntegerField(primary_key=True),
+    id_historial = models.IntegerField(primary_key=True)
     id_cliente = models.ForeignKey('Cliente',on_delete=models.CASCADE, db_column='id_cliente')
     id_producto = models.ForeignKey('Producto',on_delete=models.CASCADE, db_column='id_producto')
-    fecha_mantencion = models.DateField(blank=False,null=False),
+    fecha_mantencion = models.DateField(blank=False,null=False)
     descripcion_mantencion = models.CharField(max_length=200)
     
 class Eventos(models.Model):
